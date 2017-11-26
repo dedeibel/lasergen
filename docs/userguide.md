@@ -485,8 +485,6 @@ rendering.
 If you want to view only a single object you can set the `single_wall_rules`
 or, more explicitly, use the `export_object_openscad` function.
 
-Note: The given directory needs to exist.
-
 Note: To actually convert the files you need the following tools:
 
 * `inkscape`
