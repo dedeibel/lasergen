@@ -636,6 +636,13 @@ def export_object_openscad(obj, config, directory, filename='export', layers=Non
     export time but may also decrease quality.
     """
 
+    if not os.path.exists(directory):
+        try:
+            os.makedirs(directory)
+        except OSError as exc:
+            if exc.errno != errno.EEXIST:
+                raise
+
     openscad_source, svg_filenames = _export_object_to_openscad(
             obj,
             filename,
