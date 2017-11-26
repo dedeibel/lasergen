@@ -689,6 +689,13 @@ def export_box_openscad(box, config, directory, main_filename='export', layers=N
     global_prereqs = []
     extra_make = ''
 
+    if not os.path.exists(directory):
+        try:
+            os.makedirs(directory)
+        except OSError as exc:
+            if exc.errno != errno.EEXIST:
+                raise
+
     for wall_index, (wall, pos, direction) in enumerate(walls):
 
         # export single wall
