@@ -124,7 +124,7 @@ def main():
     objects = cb.render(c) + [cw.render(c)]
     objects = place_2d_objects(objects, c)
 
-    with codecs.open('foo.svg', 'wb', 'utf-8') as f:
+    with codecs.open('autoc4.svg', 'wb', 'utf-8') as f:
         f.write(export_svg_with_paths(objects, c))
 
     # openscad export
@@ -133,7 +133,7 @@ def main():
     cn.colors['outline'] = 'grey'
     cn.cutting_width = 0
     cn.print_wall_names = False
-    export_box_openscad(cb, cn, 'exp', join_all_svg=False, single_wall_rules=True)
+    export_box_openscad(cb, cn, 'autoc4', join_all_svg=False, single_wall_rules=True)
 
 if __name__ == "__main__":
     main()

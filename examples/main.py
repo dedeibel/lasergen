@@ -7,7 +7,7 @@ from lasergen.planar import HexBoltCutout, CircleCutout, MountingScrewCutout
 from lasergen.wall import ToplessWall, ExtendedWall
 from lasergen.edge import CutoutEdge, EDGE_STYLE
 from lasergen.config import Config
-from lasergen.export import place_2d_objects, export_svg_with_paths
+from lasergen.export import place_2d_objects, export_svg_with_paths, export_box_openscad
 from lasergen.util import DIR
 from lasergen.units import Rel
 from lasergen.box import ClosedBox, ToplessBox
@@ -29,8 +29,16 @@ def main():
 
     objects = place_2d_objects(cb.render(c) + tb.render(c) + [e.render(c)], c)
 
-    with codecs.open('foo.svg', 'wb', 'utf-8') as f:
+    with codecs.open('main.svg', 'wb', 'utf-8') as f:
         f.write(export_svg_with_paths(objects, c))
+
+    # openscad export
+    cn = c.copy()
+    cn.colors['cutout'] = 'grey'
+    cn.colors['outline'] = 'grey'
+    cn.cutting_width = 0
+    cn.print_wall_names = False
+    export_box_openscad(cb, cn, 'main', join_all_svg=False, single_wall_rules=True)
 
 if __name__ == "__main__":
     main()
